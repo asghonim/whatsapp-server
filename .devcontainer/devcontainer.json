@@ -1,0 +1,28 @@
+{
+	"name": "Node.js & TypeScript",
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
+	"features": {
+		"ghcr.io/devcontainers-extra/features/vercel-cli": {},
+		"ghcr.io/devcontainers/features/github-cli": {},
+		"ghcr.io/devcontainers-extra/features/supabase-cli": {},
+		"ghcr.io/schlich/devcontainer-features/playwright": {},
+		"ghcr.io/postfinance/devcontainer-features/playwright-deps": {}
+	},
+	"postCreateCommand": "sh ./.devcontainer/init.sh",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"kuscamara.remove-unused-imports",
+				"mrmlnc.vscode-autoprefixer",
+				"Anthropic.claude-code",
+				"alexkrechik.cucumberautocomplete",
+				"tamasfe.even-better-toml",
+				"GitHub.vscode-github-actions",
+				"vitest.explorer",
+				"usernamehw.errorlens",
+				"YoavBls.pretty-ts-errors",
+				"shyykoserhiy.git-autoconfig"
+			]
+		}
+	}
+}
