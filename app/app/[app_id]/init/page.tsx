@@ -13,24 +13,37 @@ export default function AppPage() {
   const [qr, setQR] = useState<string | null>(null);
   const [date, setDate] = useState<Date | null>(null);
   const [image, setImage] = useState<string | null>(null);
+  const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
     (async () => {
       try {
+        const eventSource = new EventSource(`/api/${app_id}/init`);
         setState('LOADING');
-        const res = await fetch(`/api/${app_id}/qr`);
-        const data = await res.json();
-        setQR(data.qr);
-        setImage(data.qr ? await QRCode.toDataURL(data.qr) : null);
-        setState(data.state);
-        setDate(data.date);
-        setState('LOADED');
+        eventSource.onmessage = async (event) => {
+          const data = JSON.parse(event.data);
+          setQR(data.qr);
+          setImage(data.qr ? await QRCode.toDataURL(data.qr) : null);
+          setState(data.state);
+          setDate(data.date);
+        };
       } catch (error) {
         console.error('Error fetching QR code:', error);
         setState('ERROR');
       }
     })()
   }, [app_id]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      // 2. Always use the functional update form (prev => prev + 1) 
+      // to avoid tracking stale closures or old state values
+      setSeconds((prevSeconds) => prevSeconds + 1);
+    }, 1000);
+
+    // 3. Return a cleanup function to clear the timer when the component unmounts
+    return () => clearInterval(intervalId);
+  }, []); // Empty array ensures this effect only runs once when mounting
 
   return (
     <div>

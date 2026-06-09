@@ -6,9 +6,12 @@
 		"ghcr.io/devcontainers/features/github-cli": {},
 		"ghcr.io/devcontainers-extra/features/supabase-cli": {},
 		"ghcr.io/schlich/devcontainer-features/playwright": {},
-		"ghcr.io/postfinance/devcontainer-features/playwright-deps": {}
+		"ghcr.io/postfinance/devcontainer-features/playwright-deps": {},
+		"ghcr.io/devcontainers/features/common-utils:2": {
+      "installJust": true
+    }
 	},
-	"postCreateCommand": "sh ./.devcontainer/init.sh",
+	"postCreateCommand": "./.devcontainer/init.sh",
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -21,7 +24,8 @@
 				"vitest.explorer",
 				"usernamehw.errorlens",
 				"YoavBls.pretty-ts-errors",
-				"shyykoserhiy.git-autoconfig"
+				"shyykoserhiy.git-autoconfig",
+				"skellock.just"
 			]
 		}
 	}
